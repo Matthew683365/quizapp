@@ -14,7 +14,7 @@ Features
 
 Installation
 ------------
-1. Clone or download the repository.
+1. Clone or downloads the repository.
 2. Open the project folder.
 3. Follow the app-specific setup instructions if provided.
 
