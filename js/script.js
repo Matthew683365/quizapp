@@ -1,9 +1,8 @@
 // ================================
 // GENERAL KNOWLEDGE QUIZ APP LOGIC
-// Now includes Progress Bar + More Questions
 // ================================
 
-// Array of quiz questions
+// Array of quiz questions (MIXED: Multiple choice + True/False)
 const questions = [
   {
     question: "What is the capital city of France?",
@@ -15,12 +14,26 @@ const questions = [
     ]
   },
   {
+    question: "True or False: The Earth is flat.",
+    answers: [
+      { text: "True", correct: false },
+      { text: "False", correct: true }
+    ]
+  },
+  {
     question: "Which planet is known as the Red Planet?",
     answers: [
       { text: "Mars", correct: true },
       { text: "Venus", correct: false },
       { text: "Jupiter", correct: false },
       { text: "Mercury", correct: false }
+    ]
+  },
+  {
+    question: "True or False: Water freezes at 0°C (32°F).",
+    answers: [
+      { text: "True", correct: true },
+      { text: "False", correct: false }
     ]
   },
   {
@@ -39,6 +52,13 @@ const questions = [
       { text: "5", correct: false },
       { text: "6", correct: false },
       { text: "8", correct: false }
+    ]
+  },
+  {
+    question: "True or False: The Great Wall of China is visible from space with the naked eye.",
+    answers: [
+      { text: "True", correct: false },
+      { text: "False", correct: true }
     ]
   },
   {
@@ -87,6 +107,13 @@ const questions = [
     ]
   },
   {
+    question: "True or False: Lightning never strikes the same place twice.",
+    answers: [
+      { text: "True", correct: false },
+      { text: "False", correct: true }
+    ]
+  },
+  {
     question: "What is the hardest natural substance on Earth?",
     answers: [
       { text: "Diamond", correct: true },
@@ -132,6 +159,13 @@ const questions = [
     ]
   },
   {
+    question: "True or False: Humans have walked on the Moon.",
+    answers: [
+      { text: "True", correct: true },
+      { text: "False", correct: false }
+    ]
+  },
+  {
     question: "What is the tallest mountain in the world?",
     answers: [
       { text: "Mount Everest", correct: true },
@@ -157,17 +191,33 @@ const progressText = document.getElementById("progress-text");
 let currentQuestionIndex = 0;
 let score = 0;
 
+// This will store the shuffled version of the quiz questions
+let shuffledQuestions = [];
+
+// ================================
+// FUNCTION: SHUFFLE QUESTIONS
+// Randomizes the order of the questions each game
+// ================================
+function shuffleQuestions() {
+  // The sort with Math.random shuffles the array
+  shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+}
+
 // ================================
 // FUNCTION: START QUIZ
 // Resets everything and loads first question
 // ================================
 function startQuiz() {
+  shuffleQuestions(); // Shuffle questions at the start
+
   currentQuestionIndex = 0;
   score = 0;
+
   scoreText.textContent = "Score: 0";
   nextBtn.style.display = "none";
+
   showQuestion();
-  updateProgress(); // Update progress bar when quiz starts
+  updateProgress();
 }
 
 // ================================
@@ -175,12 +225,11 @@ function startQuiz() {
 // Displays current question and answers
 // ================================
 function showQuestion() {
-  resetState(); // Clear old buttons first
+  resetState();
 
-  // Get current question from array
-  const currentQuestion = questions[currentQuestionIndex];
+  // Get current question from shuffled array
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
 
-  // Display question text
   questionElement.textContent = currentQuestion.question;
 
   // Create answer buttons dynamically
@@ -198,13 +247,12 @@ function showQuestion() {
     answerButtons.appendChild(button);
   });
 
-  // Update progress each time a question loads
   updateProgress();
 }
 
 // ================================
 // FUNCTION: RESET STATE
-// Clears previous answers and hides next button
+// Clears old answers and hides next button
 // ================================
 function resetState() {
   nextBtn.style.display = "none";
@@ -231,50 +279,44 @@ function selectAnswer(e) {
     selectedBtn.classList.add("wrong");
   }
 
-  // Show correct answer after user clicks
+  // Highlight correct answer and disable all buttons
   Array.from(answerButtons.children).forEach(button => {
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
     }
 
-    // Disable all buttons after selection
     button.disabled = true;
   });
 
-  // Update score display
+  // Update score text
   scoreText.textContent = `Score: ${score}`;
 
-  // Show the next button
+  // Show next button
   nextBtn.style.display = "block";
 }
 
 // ================================
 // FUNCTION: UPDATE PROGRESS
-// Updates progress bar width + question counter text
+// Updates progress bar and question counter
 // ================================
 function updateProgress() {
-  const totalQuestions = questions.length;
+  const totalQuestions = shuffledQuestions.length;
   const currentQuestionNumber = currentQuestionIndex + 1;
 
-  // Update progress text (example: Question 3 of 15)
   progressText.textContent = `Question ${currentQuestionNumber} of ${totalQuestions}`;
 
-  // Calculate percentage for progress bar
   const progressPercent = (currentQuestionNumber / totalQuestions) * 100;
-
-  // Update progress bar width
   progressBar.style.width = `${progressPercent}%`;
 }
 
 // ================================
 // FUNCTION: SHOW NEXT QUESTION
-// Moves to next question or ends quiz
+// Loads the next question or ends the quiz
 // ================================
 function showNextQuestion() {
   currentQuestionIndex++;
 
-  // If there are more questions, show them
-  if (currentQuestionIndex < questions.length) {
+  if (currentQuestionIndex < shuffledQuestions.length) {
     showQuestion();
   } else {
     showFinalScore();
@@ -283,19 +325,15 @@ function showNextQuestion() {
 
 // ================================
 // FUNCTION: SHOW FINAL SCORE
-// Displays quiz completion message
+// Shows final score message at the end
 // ================================
 function showFinalScore() {
   resetState();
 
-  // Display final message
-  questionElement.textContent = `Quiz Finished! Your final score is ${score} out of ${questions.length}.`;
+  questionElement.textContent = `Quiz Finished! Your final score is ${score} out of ${shuffledQuestions.length}.`;
 
-  // Set progress bar to 100% when finished
   progressBar.style.width = "100%";
-
-  // Update progress text when quiz ends
-  progressText.textContent = `Completed! (${questions.length} Questions)`;
+  progressText.textContent = `Completed! (${shuffledQuestions.length} Questions)`;
 
   nextBtn.style.display = "none";
 }
@@ -303,12 +341,8 @@ function showFinalScore() {
 // ================================
 // EVENT LISTENERS
 // ================================
-
-// Next button click loads next question
 nextBtn.addEventListener("click", showNextQuestion);
-
-// Restart button starts quiz again
 restartBtn.addEventListener("click", startQuiz);
 
-// Start quiz automatically when page loads
+// Start quiz automatically when quiz page loads
 startQuiz();
