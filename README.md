@@ -57,19 +57,19 @@ The instructions page will load first automatically.
 
 ## Instructions Page
 
-![Instructions Page](https://github.com/Matthew683365/quizapp/blob/dc650cf719dcc87ae010648fc65f3c30011725d9/image01.jpeg)
+![Instructions Page](./assets/instructionpage.png)
 
 ---
 
 ## Quiz Screen
 
-![Quiz Screen](https://github.com/Matthew683365/quizapp/blob/b792fe111e30d44b8d32f7e58c5f2222247b82ee/image0.jpeg)
+![Quiz Screen](./assets/quizpage.png)
 
 ---
 
 ## Final Results Screen
 
-![Results Screen](https://github.com/Matthew683365/quizapp/blob/dc650cf719dcc87ae010648fc65f3c30011725d9/image1.jpeg)
+![Results Screen](./assets/resultpage.png)
 
 ---
 
@@ -95,27 +95,26 @@ This project was designed to be:
 ---
 # faults encountered
 
-- links that were not allowing the app to run smoothly
-
-- I used sources like the internet and utube videos , I also asked my software friends for guidance.
-
 ---
 
 # testing performed
 
-- w3c validator came back with two items that dont affect the code 
--Info: Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.
+## W3C Validator
 
-From line 4, column 3; to line 4, column 26
+![Results Screen](./assets/W3CVALIDATION.png)
+![Results Screen](./assets/W3CVALIDATIONMAINQUIZ.png)
 
-↩<head>↩  <meta charset="UTF-8" />↩  <me
+---
 
-Info: Trailing slash on void elements has no effect and interacts badly with unquoted attribute values.
+## JIGSAW Validator
 
-From line 5, column 3; to line 5, column 74
+![Results Screen](./assets/JIGSAWVALIDATION.png)
 
-F-8" />↩  <meta name="viewport" content="width=device-width, initial-scale=1.0" />↩↩  <t
+---
 
-- Jigsaw validator has come back with no errors
+## JSHINT Validator
 
-- jshint came back with no serious code errors 
+![Results Screen](./assets/JSHINTVALIDATER1.png)
+![Results Screen](./assets/JSHINTVALIDATER2.png)
+
+---
