@@ -182,7 +182,7 @@ const answerButtons = document.getElementById("answer-buttons");
 const nextBtn = document.getElementById("next-btn");
 const restartBtn = document.getElementById("restart-btn");
 const scoreText = document.getElementById("score-text");
-
+const backBtn = document.getElementById("back-btn");
 // Progress bar + progress text
 const progressBar = document.getElementById("progress-bar");
 const progressText = document.getElementById("progress-text");
@@ -337,12 +337,27 @@ function showFinalScore() {
 
   nextBtn.style.display = "none";
 }
+// ================================
+// FUNCTION: GO BACK
+// Returns to previous question
+// ================================
+function goBack() {
 
+  if (currentQuestionIndex > 0) {
+
+    currentQuestionIndex--;
+
+    showQuestion();
+
+    // Hide next button until user answers again
+    nextBtn.style.display = "none";
+  }
+}
 // ================================
 // EVENT LISTENERS
 // ================================
 nextBtn.addEventListener("click", showNextQuestion);
 restartBtn.addEventListener("click", startQuiz);
-
+backBtn.addEventListener("click", goBack);
 // Start quiz automatically when quiz page loads
 startQuiz();

@@ -89,28 +89,6 @@ body {
   display: flex;
   justify-content: space-between;
 }
-
-/* Next button */
-.next-btn {
-  padding: 10px 20px;
-  border: none;
-  background: #007bff;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  display: none;
-}
-
-/* Restart button */
-.restart-btn {
-  padding: 10px 20px;
-  border: none;
-  background: #ffc107;
-  border-radius: 8px;
-  color: black;
-  cursor: pointer;
-}
-
 /* Score text */
 #score-text {
   margin-top: 20px;
@@ -148,4 +126,34 @@ body {
 /* Hover effect for Start Quiz button */
 .start-btn:hover {
   background: #00a3d6;
+}
+/* Back button */
+.back-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #6c757d;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Restart button */
+.restart-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #ffc107;
+  border-radius: 8px;
+  color: black;
+  cursor: pointer;
+}
+
+/* Next button */
+.next-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: none;
 }
